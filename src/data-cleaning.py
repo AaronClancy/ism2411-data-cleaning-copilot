@@ -19,3 +19,7 @@ def clean_text_fields(df):
             df[col] = df[col].str.strip()
     return df
 
+# Handle missing values in price and quantity. Rows with missing values in these columns are dropped
+def handle_missing_values(df):
+    df = df.dropna(subset=['price', 'quantity'])
+    return df
