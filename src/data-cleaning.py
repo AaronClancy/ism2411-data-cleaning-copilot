@@ -30,7 +30,7 @@ def remove_invalid_rows(df):
     return df
 
 def main():
-    raw_path = 'data/raw/sales_data.csv'
+    raw_path = 'data/raw/sales_data_raw.csv'
     cleaned_path = 'data/cleaned/sales_data_cleaned.csv'
 
     df_raw = load_data(raw_path)
