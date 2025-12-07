@@ -23,3 +23,23 @@ def clean_text_fields(df):
 def handle_missing_values(df):
     df = df.dropna(subset=['price', 'quantity'])
     return df
+
+# Remove rows with negative price or quantity values
+def remove_invalid_rows(df):
+    df = df[(df['price'] >= 0) & (df['quantity'] >= 0)]
+    return df
+
+def main():
+    raw_path = 'data/raw/sales_data.csv'
+    cleaned_path = 'data/cleaned/sales_data_cleaned.csv'
+
+    df_raw = load_data(raw_path)
+    df_clean = standardize_column_names(df_raw)
+    df_clean = clean_text_fields(df_clean)
+    df_clean = handle_missing_values(df_clean)
+    df_clean = remove_invalid_rows(df_clean)
+    df_clean.to_csv(cleaned_path, index=False)
+    print(f"Cleaning complete. First few rows:\n{df_clean.head()}")
+
+if __name__ == "__main__":
+    main()
